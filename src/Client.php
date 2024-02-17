@@ -26,6 +26,8 @@ class Client
     }
 
     /**
+     * @return Generator<Response\ChatStreamResponse|Response\ChatStreamFinalResponse>
+     *
      * @throws OllamaException
      */
     public function chatStream(Request\ChatRequest $request): Generator
@@ -50,6 +52,8 @@ class Client
     }
 
     /**
+     * @return Generator<Response\StreamStatusResponse>
+     *
      * @throws OllamaException
      */
     public function createStream(Request\CreateRequest $request): Generator
@@ -70,6 +74,8 @@ class Client
     }
 
     /**
+     * @return Generator<Response\StreamStatusResponse>
+     *
      * @throws OllamaException
      */
     public function pullStream(Request\PullRequest $request): Generator
@@ -90,6 +96,8 @@ class Client
     }
 
     /**
+     * @return Generator<Response\StreamStatusResponse>
+     *
      * @throws OllamaException
      */
     public function pushStream(Request\PushRequest $request): Generator
