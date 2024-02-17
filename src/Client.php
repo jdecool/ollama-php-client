@@ -63,6 +63,13 @@ class Client
         }
     }
 
+    public function list(): Response\ListModelsResponse
+    {
+        $data = $this->processRequest('GET', 'tags');
+
+        return Response\ListModelsResponse::fromArray($data);
+    }
+
     /**
      * @throws OllamaException
      */
