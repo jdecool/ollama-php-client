@@ -20,7 +20,7 @@ class Client
      */
     public function chat(Request\ChatRequest $request): Response\ChatResponse
     {
-        $data = $this->processRequest('chat', $request);
+        $data = $this->processRequest('POST', 'chat', $request);
 
         return Response\ChatResponse::fromArray($data);
     }
@@ -32,7 +32,7 @@ class Client
      */
     public function chatStream(Request\ChatRequest $request): Generator
     {
-        foreach ($this->processStream('chat', $request) as $chunk) {
+        foreach ($this->processStream('POST', 'chat', $request) as $chunk) {
             /** @phpstan-ignore-next-line */
             yield match ($chunk['done'] ?? false) {
                 true => Response\ChatStreamFinalResponse::fromArray($chunk),
@@ -46,7 +46,7 @@ class Client
      */
     public function create(Request\CreateRequest $request): void
     {
-        $data = $this->processRequest('create', $request);
+        $data = $this->processRequest('POST', 'create', $request);
 
         $this->processResponseWithoutContent($data);
     }
@@ -58,7 +58,7 @@ class Client
      */
     public function createStream(Request\CreateRequest $request): Generator
     {
-        foreach ($this->processStream('create', $request) as $chunk) {
+        foreach ($this->processStream('POST', 'create', $request) as $chunk) {
             yield Response\StreamStatusResponse::fromArray($chunk);
         }
     }
@@ -68,7 +68,7 @@ class Client
      */
     public function pull(Request\PullRequest $request): void
     {
-        $data = $this->processRequest('pull', $request);
+        $data = $this->processRequest('POST', 'pull', $request);
 
         $this->processResponseWithoutContent($data);
     }
@@ -80,7 +80,7 @@ class Client
      */
     public function pullStream(Request\PullRequest $request): Generator
     {
-        foreach ($this->processStream('pull', $request) as $chunk) {
+        foreach ($this->processStream('POST', 'pull', $request) as $chunk) {
             yield Response\StreamStatusResponse::fromArray($chunk);
         }
     }
@@ -90,7 +90,7 @@ class Client
      */
     public function push(Request\PushRequest $request): void
     {
-        $data = $this->processRequest('push', $request);
+        $data = $this->processRequest('POST', 'push', $request);
 
         $this->processResponseWithoutContent($data);
     }
@@ -102,7 +102,7 @@ class Client
      */
     public function pushStream(Request\PushRequest $request): Generator
     {
-        foreach ($this->processStream('push', $request) as $chunk) {
+        foreach ($this->processStream('POST', 'push', $request) as $chunk) {
             yield Response\StreamStatusResponse::fromArray($chunk);
         }
     }
@@ -110,12 +110,16 @@ class Client
     /**
      * @throws OllamaException
      */
-    private function processRequest(string $endpoint, Model\Request $request): array
+    private function processRequest(string $method, string $endpoint, ?Model\Request $request = null): array
     {
-        $body = $request->toArray();
-        $body['stream'] = false;
+        $body = $request?->toArray();
+        if ($body !== null) {
+            $body['stream'] = false;
 
-        $response = $this->http->request('POST', "/api/$endpoint", body: json_encode($body, JSON_THROW_ON_ERROR));
+            $body = json_encode($body, JSON_THROW_ON_ERROR);
+        }
+
+        $response = $this->http->request($method, "/api/$endpoint", body: $body);
 
         try {
             $data = json_decode($response, true, flags: JSON_THROW_ON_ERROR);
@@ -133,12 +137,12 @@ class Client
     /**
      * @return Generator<array>
      */
-    private function processStream(string $endpoint, Model\Request $request): Generator
+    private function processStream(string $method, string $endpoint, Model\Request $request): Generator
     {
         $body = $request->toArray();
         $body['stream'] = true;
 
-        $chunks = $this->http->stream('POST', "/api/$endpoint", body: json_encode($body, JSON_THROW_ON_ERROR));
+        $chunks = $this->http->stream($method, "/api/$endpoint", body: json_encode($body, JSON_THROW_ON_ERROR));
         foreach ($chunks as $chunk) {
             try {
                 $content = json_decode($chunk, true, flags: JSON_THROW_ON_ERROR);
