@@ -3,8 +3,8 @@
 namespace JDecool\OllamaClient;
 
 use Generator;
-use JDecool\OllamaClient\Model\Request;
-use JDecool\OllamaClient\Model\Response;
+use JDecool\OllamaClient\Client\Request;
+use JDecool\OllamaClient\Client\Response;
 use JsonException;
 use function json_encode;
 
@@ -117,7 +117,7 @@ class Client
     /**
      * @throws OllamaException
      */
-    private function processRequest(string $method, string $endpoint, ?Model\Request $request = null): array
+    private function processRequest(string $method, string $endpoint, ?Client\Request $request = null): array
     {
         $body = $request?->toArray();
         if ($body !== null) {
@@ -144,7 +144,7 @@ class Client
     /**
      * @return Generator<array>
      */
-    private function processStream(string $method, string $endpoint, Model\Request $request): Generator
+    private function processStream(string $method, string $endpoint, Client\Request $request): Generator
     {
         $body = $request->toArray();
         $body['stream'] = true;

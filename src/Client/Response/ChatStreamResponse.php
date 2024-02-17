@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace JDecool\OllamaClient\Model\Response;
+namespace JDecool\OllamaClient\Client\Response;
 
 use DateTimeImmutable;
-use JDecool\OllamaClient\Model\Message;
+use JDecool\OllamaClient\Client\Message;
 
 class ChatStreamResponse
 {

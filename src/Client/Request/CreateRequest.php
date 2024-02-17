@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace JDecool\OllamaClient\Model\Request;
+namespace JDecool\OllamaClient\Client\Request;
 
 use InvalidArgumentException;
-use JDecool\OllamaClient\Model\Request;
+use JDecool\OllamaClient\Client\Request;
 
 class CreateRequest extends Request
 {

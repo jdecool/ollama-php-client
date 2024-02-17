@@ -3,8 +3,8 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use JDecool\OllamaClient\ClientBuilder;
-use JDecool\OllamaClient\Model\Message;
-use JDecool\OllamaClient\Model\Request\ChatRequest;
+use JDecool\OllamaClient\Client\Message;
+use JDecool\OllamaClient\Client\Request\ChatRequest;
 
 $builder = new ClientBuilder();
 $client = $builder->create();

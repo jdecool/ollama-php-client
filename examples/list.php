@@ -3,7 +3,7 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use JDecool\OllamaClient\ClientBuilder;
-use JDecool\OllamaClient\Model\Request\CreateRequest;
+use JDecool\OllamaClient\Client\Request\CreateRequest;
 
 $builder = new ClientBuilder();
 

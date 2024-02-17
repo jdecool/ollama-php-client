@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace JDecool\OllamaClient\Model\Request;
+namespace JDecool\OllamaClient\Client\Request;
 
-use JDecool\OllamaClient\Model\Request;
+use JDecool\OllamaClient\Client\Request;
 
 class PullRequest extends Request
 {

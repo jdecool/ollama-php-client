@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace JDecool\OllamaClient\Model;
+namespace JDecool\OllamaClient\Client;
 
 class Message extends Request
 {

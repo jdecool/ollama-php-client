@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace JDecool\OllamaClient\Model\Response;
+namespace JDecool\OllamaClient\Client\Response;
 
 use JDecool\OllamaClient\Resource\Model;
 
