@@ -16,7 +16,7 @@ class ChatResponse
             done: $data['done'],
             totalDuration: $data['total_duration'],
             loadDuration: $data['load_duration'],
-            promptEvalCount: $data['prompt_eval_count'],
+            promptEvalCount: $data['prompt_eval_count'] ?? null,
             promptEvalDuration: $data['prompt_eval_duration'],
             evalCount: $data['eval_count'],
         );
@@ -29,7 +29,7 @@ class ChatResponse
         public readonly bool $done,
         public readonly int $totalDuration,
         public readonly int $loadDuration,
-        public readonly int $promptEvalCount,
+        public readonly ?int $promptEvalCount,
         public readonly int $promptEvalDuration,
         public readonly int $evalCount,
     ) {
