@@ -9,6 +9,8 @@ class ChatResponse
 {
     public static function fromArray(array $data): self
     {
+        var_dump($data);
+        
         return new self(
             model: $data['model'],
             createdAt: new DateTimeImmutable($data['created_at']),
