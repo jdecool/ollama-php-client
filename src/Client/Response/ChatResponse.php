@@ -19,8 +19,8 @@ class ChatResponse
             totalDuration: $data['total_duration'] ?? null,
             loadDuration: $data['load_duration'] ?? null,
             promptEvalCount: $data['prompt_eval_count'] ?? null,
-            promptEvalDuration: $data['prompt_eval_duration'],
-            evalCount: $data['eval_count'],
+            promptEvalDuration: $data['prompt_eval_duration'] ?? null,
+            evalCount: $data['eval_count'] ?? null,
         );
     }
 
@@ -32,8 +32,8 @@ class ChatResponse
         public readonly ?int $totalDuration,
         public readonly ?int $loadDuration,
         public readonly ?int $promptEvalCount,
-        public readonly int $promptEvalDuration,
-        public readonly int $evalCount,
+        public readonly ?int $promptEvalDuration,
+        public readonly ?int $evalCount,
     ) {
     }
 }
