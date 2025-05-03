@@ -82,3 +82,14 @@ jobs:
                   COMPOSER_FLAGS: ${{ matrix.flags }}
             - name: Run PHPUnit
               run: vendor/bin/phpunit
+
+    openapi:
+        name: Validate OpenAPI specification
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - uses: swaggerexpert/apidom-validate@v1
+              with:
+                  definition-file: docs/ollama.yaml
+                  fails-on: 1 # Fails if error messages exist in validation output
