@@ -15,7 +15,7 @@ class Http
     ) {
     }
 
-    public function request(string $method, string $uri, string $body = null): string
+    public function request(string $method, string $uri, ?string $body = null): string
     {
         $response = $this->executeRequest($method, $uri, $body);
 
@@ -30,7 +30,7 @@ class Http
     /**
      * @return Generator<string>
      */
-    public function stream(string $method, string $uri, string $body = null): Generator
+    public function stream(string $method, string $uri, ?string $body = null): Generator
     {
         $response = $this->executeRequest($method, $uri, $body);
 
@@ -49,7 +49,7 @@ class Http
         }
     }
 
-    private function executeRequest(string $method, string $uri, string $body = null): ResponseInterface
+    private function executeRequest(string $method, string $uri, ?string $body = null): ResponseInterface
     {
         $this->logger->debug('HTTP Request: {method} {uri}', [
             'method' => $method,
