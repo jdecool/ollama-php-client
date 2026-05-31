@@ -3,6 +3,7 @@
     "description": "Ollama PHP API client",
     "license": "MIT",
     "type": "library",
+    "abandoned": "symfony/ai-platform",
     "authors": [
         {
             "name": "Jérémy DECOOL",
